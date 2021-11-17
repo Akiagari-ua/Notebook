@@ -3,14 +3,14 @@ type justifyContent = 'center' | 'start' | 'space-between' | 'space-around' | 's
 type alignItems = 'center' | 'flex-start' | 'flex-end' | 'baseline' | 'stretch';
 
 export interface BoxType {
-    width?: Size;
-    height?: Size;
-    bg?: string;
-    padding?: Size;
-    margin?: Size;
+  width?: Size;
+  height?: Size;
+  bg?: string;
+  padding?: Size;
+  margin?: Size;
 }
 
 export interface FlexType extends BoxType {
-    justify?: justifyContent;
-    alignItems?: alignItems;
+  justify?: justifyContent;
+  alignItems?: alignItems;
 }

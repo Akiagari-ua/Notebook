@@ -6,7 +6,18 @@ import React from 'react';
 //   Link
 // } from 'react-router-dom';
 import Header from './components/Header';
+import { GlobalStyles } from './GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import themes from './ui-kit/theme';
 
-const App = () => <Header />;
+const currentTheme = 'light';
 
+const App = () => {
+  return (
+    <ThemeProvider theme={themes[currentTheme]}>
+      <Header />
+      <GlobalStyles />
+    </ThemeProvider>
+  );
+};
 export default App;
