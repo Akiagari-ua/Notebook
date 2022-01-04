@@ -1,21 +1,19 @@
 import React from 'react';
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link
-// } from 'react-router-dom';
-import Header from './components/Header';
 import { GlobalStyles } from './GlobalStyles';
 import { ThemeProvider } from 'styled-components';
 import themes from './ui-kit/theme';
+import { routerConfig } from './routes';
+import { useRoutes } from 'react-router-dom';
+
+// import { Layout } from './components/Layout';
 
 const currentTheme = 'light';
 
 const App = () => {
+  const content = useRoutes(routerConfig);
   return (
     <ThemeProvider theme={themes[currentTheme]}>
-      <Header />
+      {content}
       <GlobalStyles />
     </ThemeProvider>
   );
