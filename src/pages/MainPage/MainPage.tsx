@@ -1,21 +1,15 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
+import { UserSection } from './components';
 import { SidebarContainer, ContentContainer, Wrapper } from './styles';
 
 export const MainPage = () => {
+  // const notepads: any = [];
   return (
     <Wrapper>
       <SidebarContainer>
-        {[
-          ...Array(20)
-            .fill('')
-            .map((_, i) => (
-              <Link to={`${i}`} key={i}>
-                Notepad {i}
-              </Link>
-            )),
-        ]}
+        <UserSection />
       </SidebarContainer>
       <ContentContainer>
         <Outlet />

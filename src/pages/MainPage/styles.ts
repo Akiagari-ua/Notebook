@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { rem } from '../../ui-kit/utils';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -7,11 +8,12 @@ export const Wrapper = styled.div`
 `;
 
 export const SidebarContainer = styled.div`
-  background-color: green;
   flex: 1;
+  border-right: 2px solid;
+  padding: ${rem(15)};
 `;
 
 export const ContentContainer = styled.div`
-  background-color: grey;
   flex: 3;
+  padding: ${rem(20)};
 `;

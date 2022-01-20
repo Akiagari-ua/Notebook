@@ -37,15 +37,10 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.tsx?$/, use: 'ts-loader' },
+      { test: /\.(tsx|ts)$/i, use: 'ts-loader' },
       {
         test: /\.(svg|jpg|png)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
-        type: 'javascript/auto',
+        type: 'asset/resource',
       },
     ],
   },

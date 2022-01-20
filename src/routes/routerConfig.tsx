@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LoginPage, MainPage } from '../pages';
+import { LoginPage, MainPage, WelcomePage } from '../pages';
 import { Navigate } from 'react-router';
 
 import { routes } from './routes';
@@ -20,7 +20,7 @@ export const routerConfig = [
     children: [
       {
         path: '',
-        element: <>Welcome</>,
+        element: <WelcomePage />,
       },
       {
         path: `:id`,
