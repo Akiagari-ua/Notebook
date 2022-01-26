@@ -28,6 +28,7 @@ module.exports = {
     alias: {
       '@ui/form': path.resolve(__dirname, 'src/ui-kit/form'),
       '@ui/elements': path.resolve(__dirname, 'src/ui-kit/elements'),
+      '@ui/utils': path.resolve(__dirname, 'src/ui-kit/utils'),
     },
   },
   plugins: [

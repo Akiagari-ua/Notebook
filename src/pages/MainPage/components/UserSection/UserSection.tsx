@@ -1,6 +1,12 @@
 import React from 'react';
 import { Icon } from '@ui/elements';
+import { Wrapper } from './styles';
 
 export const UserSection = () => {
-  return <Icon name={Icon.icons.user} size={Icon.size.medium} />;
+  return (
+    <Wrapper>
+      <Icon name={Icon.icons.user} size={Icon.size.medium} />
+      <div>Nikita</div>
+    </Wrapper>
+  );
 };

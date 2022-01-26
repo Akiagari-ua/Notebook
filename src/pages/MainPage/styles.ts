@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
 export const SidebarContainer = styled.div`
   flex: 1;
   border-right: 2px solid;
-  padding: ${rem(15)};
 `;
 
 export const ContentContainer = styled.div`
