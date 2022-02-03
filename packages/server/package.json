@@ -6,12 +6,6 @@
   "scripts": {
     "notepad:server": "nodemon index.ts"
   },
-  "browser": {
-    "fs": false,
-    "path": false,
-    "os": false,
-    "http": false
-  },
   "devDependencies": {
     "@types/node": "^17.0.14",
     "nodemon": "^2.0.15",
