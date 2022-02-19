@@ -8,7 +8,9 @@
     "ts-loader": "^9.2.6"
   },
   "scripts": {
-    "client": "lerna run notepad:dev"
+    "client": "lerna run notepad:dev --parallel",
+    "user-servise": "lerna run notepad:user --parallel",
+    "server": "lerna run notepad:server --parallel"
   },
   "workspaces": 
   [
