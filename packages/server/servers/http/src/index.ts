@@ -1,44 +1,8 @@
-import http, { IncomingMessage } from 'http';
+import http from 'http';
 
-import { TServer, Routing, Methods } from './types';
+import { getHandlerByPathname, bodyParser } from './helpers';
 
-//TODO: parser url
-//TODO: implement reading get parametrs
-//TODO: add handling errors
-//TODO: implement check cookies
-//TODO: implement response to client
-
-type TMethodsAndRoutes = {
-  method: Methods;
-  route: Routing;
-};
-
-const getRouteAndMethod = (pathname: string): TMethodsAndRoutes => {
-  const [route, method] = pathname.substring(1).split('/');
-
-  const currentRoute = route as Routing;
-  const currentMethod = method as Methods;
-
-  if (!Object.values(Routing).includes(currentRoute)) throw new Error('Route Not found');
-  if (!Object.values(Methods).includes(currentMethod)) throw new Error('Method Not found');
-
-  return {
-    route: currentRoute,
-    method: currentMethod,
-  };
-};
-
-const bodyParser = async (req: IncomingMessage) => {
-  const buffers = [];
-
-  for await (const chunk of req) {
-    buffers.push(chunk);
-  }
-
-  Buffer.concat(buffers).toString();
-
-  return Buffer.concat(buffers).toString();
-};
+import { TServer } from '@server/global';
 
 export default ({ port, hostname, routing }: TServer) => {
   http
@@ -48,22 +12,15 @@ export default ({ port, hostname, routing }: TServer) => {
       let body: any;
 
       const { pathname, searchParams } = new URL(`http://${hostname}:${port}${req?.url}`);
-      const { route, method } = getRouteAndMethod(pathname);
+      const handler = getHandlerByPathname(pathname, routing);
 
-      const apiRoute = routing?.[route];
+      if (!handler) return; // TODO: unnecessary check. There is check inside getHandlerByPathname
 
       if (req.method !== 'GET') {
         body = await bodyParser(req);
       }
 
-      if (!apiRoute) return;
-
-      const handler = apiRoute[method];
-
-      if (!handler) return;
-
       const response = await handler({ body, searchParams });
-
       const parsedResponse = JSON.stringify(response);
 
       res.statusCode = response?.code;

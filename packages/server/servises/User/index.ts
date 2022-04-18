@@ -1,4 +1,2 @@
-export default () => {
-  console.log('Server is Running');
-  return 'Users';
-};
+export { userServise } from './userServise';
+export * from './types';
