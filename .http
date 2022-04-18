@@ -1,0 +1,24 @@
+@hostname = 127.0.0.1
+@port = 3000
+
+
+###
+GET http://{{hostname}}:{{port}}/user/createUser
+
+###
+GET http://{{hostname}}:{{port}}/user/getUser
+
+###
+GET http://{{hostname}}:{{port}}/user/createUser?id=123&?s=ads
+
+###
+GET http://{{hostname}}:{{port}}/user/deleteUser?id=123&?s=ads
+
+
+###
+POST http://{{hostname}}:{{port}}/user/createUser
+content-type: application/json
+
+{
+    "key": "prop"
+}
