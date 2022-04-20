@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "@server/http": "1.0.0",
-    "@server/global": "1.0.0"
+    "@server/global": "1.0.0",
+    "uuid": "8.3.2",
+    "@types/uuid": "8.3.2"
   },
   "devDependencies": {
     "@types/node": "^17.0.14",

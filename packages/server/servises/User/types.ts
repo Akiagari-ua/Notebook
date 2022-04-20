@@ -1,11 +1,13 @@
 import { THandler } from '@server/global';
 
-export type TCreateUserBody = {
+export type TUser = {
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
 };
 
-export type TCreateUserMethod = THandler<TCreateUserBody>;
+export type TCreateUserMethod = THandler<TUser>;
 export type TGetUserMethod = THandler;
 
 export interface TUserMethods {
