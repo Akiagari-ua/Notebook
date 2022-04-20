@@ -1,39 +1,29 @@
 import fs from 'fs/promises';
-
-// export const DB = [
-//   {
-//     id: '1',
-//     email: 'qwe@gmail.com',
-//     password: '123',
-//     firstName: 'Nikita',
-//     lastName: 'Chudakov',
-//   },
-//   {
-//     id: '2',
-//     email: 'xxxx@gmail.com',
-//     password: '123',
-//     firstName: 'Nikita1',
-//     lastName: 'Chudakov1',
-//   },
-//   {
-//     id: '3',
-//     email: 'qwasde@gmail.com',
-//     password: '123',
-//     firstName: 'Nikita2',
-//     lastName: 'Chudakov2',
-//   },
-//   {
-//     id: '4',
-//     email: 'qw123e@gmail.com',
-//     password: '123',
-//     firstName: 'Niki',
-//     lastName: 'Chudak',
-//   },
-// ];
+import { TUser, TUserModel } from './types';
+import { v4 as uuidv4 } from 'uuid';
 
 export const DB = {
-  create() {
-    console.log('!!!!!!!!');
-    fs.writeFile('./user.json', `${Math.random()}`);
+  async create(user: TUser): Promise<TUserModel | Error> {
+    try {
+      const file = await fs.readFile('./user.json');
+      const parsedFile = JSON.parse(file.toString()) as TUserModel[];
+
+      const findedUser = parsedFile.find((item) => item.email === user.email);
+      if (findedUser) return new Error('user already exist');
+
+      const id = uuidv4();
+
+      fs.writeFile('./user.json', JSON.stringify([...parsedFile, { ...user, id }]));
+
+      return { ...user, id };
+    } catch (e) {
+      const id = uuidv4();
+      fs.writeFile('./user.json', JSON.stringify([{ ...user, id }]));
+
+      return { ...user, id };
+    }
+
+    // console.log(file.toString());
+    // fs.writeFile('./user.json', `${Math.random()}`);
   },
 };

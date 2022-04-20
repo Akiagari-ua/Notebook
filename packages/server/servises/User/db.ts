@@ -1,11 +1,10 @@
 import { DB } from './mockDb';
-import { v4 as uuidv4 } from 'uuid';
-import { TUser } from '../User/types';
+import { TUser, TUserModel } from '../User/types';
 
-type TUserTable = TUser & { id: string };
+// type TUserTable = TUser & { id: string };
 
 type TDB = {
-  create: () => void;
+  create: (user: TUser) => Promise<TUserModel | Error>;
 };
 
 const crudDB = (table: TDB) => ({
@@ -13,11 +12,9 @@ const crudDB = (table: TDB) => ({
   //   return table.find((item: any) => item[key] === value) || [];
   // },
   create: async (user: TUser) => {
-    const id = uuidv4();
-    console.log('22222222222222');
-    table.create();
+    const response = await table.create(user);
 
-    return { ...user, id };
+    return response;
   },
 });
 

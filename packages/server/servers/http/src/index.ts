@@ -13,14 +13,13 @@ export default ({ port, hostname, routing }: TServer) => {
 
       const { pathname, searchParams } = new URL(`http://${hostname}:${port}${req?.url}`);
       const handler = getHandlerByPathname(pathname, routing);
-
       if (!handler) return; // TODO: unnecessary check. There is check inside getHandlerByPathname
 
       if (req.method !== 'GET') {
         body = await bodyParser(req);
       }
 
-      const response = await handler({ body, searchParams });
+      const response = await handler({ body: JSON.parse(body), searchParams });
       const parsedResponse = JSON.stringify(response);
 
       res.statusCode = response?.code;
