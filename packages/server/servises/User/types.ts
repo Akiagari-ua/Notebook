@@ -7,10 +7,13 @@ export type TUser = {
   lastName?: string;
 };
 
-export type TUserModel = TUser & { id: string };
+export type TUserModel = Omit<TUser, 'password'> & { id: string };
+export type TUserSearchParams = {
+  [P in keyof TUserModel]?: string;
+};
 
 export type TCreateUserMethod = THandler<TUser>;
-export type TGetUserMethod = THandler;
+export type TGetUserMethod = THandler<void, TUserSearchParams>;
 
 export interface TUserMethods {
   createUser: TCreateUserMethod;

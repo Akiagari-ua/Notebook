@@ -20,6 +20,12 @@ POST http://{{hostname}}:{{port}}/user/createUser
 content-type: application/json
 
 {
-    "email": "email1@mail.com",
-    "password": "123"
+    "email": "test.com",
+    "password": "123",
+    "lastName": "Nikita"
 }
+
+###
+GET http://{{hostname}}:{{port}}/user/getUser?email=test.com
+content-type: application/json
+
