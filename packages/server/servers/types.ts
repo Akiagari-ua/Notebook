@@ -14,12 +14,13 @@ export type TResponse = {
   errors?: any[];
 };
 
-export type THandlerArgs<Body = undefined, Params = undefined> = {
+export type THandlerArgs<DB, Body = undefined> = {
   body?: Body;
-  searchParams?: Params;
+  codes: typeof CODES;
+  db: DB;
 };
 
-export type THandler<Body = undefined, Params = undefined> = (arg: THandlerArgs<Body, Params>) => Promise<TResponse>;
+export type THandler<DB, Body = undefined> = (arg: THandlerArgs<DB, Body>) => Promise<TResponse>;
 
 export type TServerRouting = {
   user: TUserMethods;

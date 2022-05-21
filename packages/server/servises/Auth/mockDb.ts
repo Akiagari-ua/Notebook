@@ -1,10 +1,13 @@
 import fs from 'fs/promises';
-import { TUser, TUserModel, TUserSearchParams } from './types';
+import { TAuth } from './types';
 import { v4 as uuidv4 } from 'uuid';
 
 const message = 'conflict';
 
-type TFindBy = Partial<TUser>;
+type TFindBy = {
+  key: keyof TUserSearchParams;
+  value: string | number;
+};
 
 const checkIsExistingFile = async (path: string) => {
   try {
@@ -21,10 +24,10 @@ const checkIsExistingFile = async (path: string) => {
 export const DB = {
   async create(user: TUser): Promise<TUserModel | Error> {
     const id = uuidv4();
-    const isExist = await checkIsExistingFile('./user.json');
+    const isExist = await checkIsExistingFile('./auth.json');
 
     if (!isExist) {
-      fs.writeFile('./user.json', JSON.stringify([{ ...user, id }]));
+      fs.writeFile('./auth.json', JSON.stringify([{ ...user, id }]));
       return { ...user, id };
     }
 
@@ -44,20 +47,10 @@ export const DB = {
     if (!isExist) {
       throw Error('not found');
     }
-
     const file = await fs.readFile('./user.json');
     const parsedFile = JSON.parse(file.toString()) as TUserModel[];
 
-    const findedUser = Object.entries(params).reduce((relevantUsers, entries) => {
-      const newUsers = relevantUsers.filter((user) => {
-        const key = entries[0] as keyof TUserModel;
-
-        const value = entries[1];
-        return user[key] !== value;
-      });
-
-      return newUsers;
-    }, parsedFile);
+    const findedUser = parsedFile.filter((item) => item[params.key] === params.value) || [];
 
     if (findedUser.length) {
       return findedUser;

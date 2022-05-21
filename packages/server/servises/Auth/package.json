@@ -1,5 +1,5 @@
 {
-  "name": "@notepad/user-servise",
+  "name": "@notepad/auth-service",
   "private": true,
   "version": "1.0.0",
   "main": "src/index.js",
@@ -15,7 +15,10 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "@notepad/user-servise": "1.0.0",
     "@server/global": "1.0.0",
-    "dotenv": "^16.0.1"
+    "@types/jsonwebtoken": "^8.5.8",
+    "dotenv": "^16.0.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
